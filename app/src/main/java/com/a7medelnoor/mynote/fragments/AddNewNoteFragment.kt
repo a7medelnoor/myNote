@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.a7medelnoor.mynote.MainActivity
 import com.a7medelnoor.mynote.R
+import com.a7medelnoor.mynote.databinding.FragmentAddNewNoteBinding
 import com.a7medelnoor.mynote.databinding.FragmentHomeBinding
 import com.a7medelnoor.mynote.viewmodel.NoteViewModel
 
@@ -16,7 +17,7 @@ import com.a7medelnoor.mynote.viewmodel.NoteViewModel
  *  www.github.com/a7medelnoor
  */
 class AddNewNoteFragment : Fragment(R.layout.fragment_add_new_note) {
-    private var _bindingAddNewFragment: FragmentHomeBinding? = null
+    private var _bindingAddNewFragment: FragmentAddNewNoteBinding? = null
     private val bindingAddNewFragment get() = _bindingAddNewFragment!!
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var mView: View
@@ -32,10 +33,10 @@ class AddNewNoteFragment : Fragment(R.layout.fragment_add_new_note) {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for Home fragment
-        _bindingAddNewFragment = FragmentHomeBinding.inflate(
-            inflater,
-            container,
-            false
+        _bindingAddNewFragment = FragmentAddNewNoteBinding.inflate(
+                inflater,
+                container,
+                false
         )
         return bindingAddNewFragment.root
     }
