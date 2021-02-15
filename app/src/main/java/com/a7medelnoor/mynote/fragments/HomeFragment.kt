@@ -11,6 +11,7 @@ import com.a7medelnoor.mynote.MainActivity
 import com.a7medelnoor.mynote.R
 import com.a7medelnoor.mynote.adapter.NoteAdapter
 import com.a7medelnoor.mynote.databinding.FragmentHomeBinding
+import com.a7medelnoor.mynote.model.Note
 import com.a7medelnoor.mynote.viewmodel.NoteViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -59,6 +60,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             setHasFixedSize(true)
             adapter = noteAdapter
         }
+        activity?.let {
+           noteViewModel.getAllNotesFormDatabase().observe(viewLifecycleOwner, { getAllNotes ->
+               noteAdapter.differ.submitList(getAllNotes)
+               updateHomeNoteFragment(getAllNotes)
+           })
+        }
+    }
+
+    private fun updateHomeNoteFragment(allNotes: List<Note>) {
+             if (allNotes.isNotEmpty()){
+                 fragmentHomeBinding.noteRecyclerView.visibility = View.VISIBLE
+                 fragmentHomeBinding.noNoteAvailabel.visibility = View.GONE
+             }else{
+                 fragmentHomeBinding.noteRecyclerView.visibility = View.GONE
+                 fragmentHomeBinding.noNoteAvailabel.visibility = View.VISIBLE
+             }
     }
 
 }
