@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.a7medelnoor.mynote.MainActivity
 import com.a7medelnoor.mynote.R
+import com.a7medelnoor.mynote.adapter.NoteAdapter
 import com.a7medelnoor.mynote.databinding.FragmentHomeBinding
 import com.a7medelnoor.mynote.toast
 import com.a7medelnoor.mynote.viewmodel.NoteViewModel
@@ -16,6 +18,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private var _fragmentHomeBinding: FragmentHomeBinding? = null
     private val binding get() = _fragmentHomeBinding!!
     private lateinit var noteViewModel: NoteViewModel
+    private lateinit var noteAdapter: NoteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,16 +40,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         noteViewModel = (activity as MainActivity).noteViewModel
         // setupNoteRecyclerView
         setupNoteRecyclerView()
-        // add button configuration
+        // bind view of fab button and handle onCLick listener
         binding.fabAddNote.setOnClickListener{mView ->
-           activity?.toast("Button clicked")
+          mView.findNavController().navigate(R.id.action_homeFragment_to_addNewNoteFragment)
         }
     }
 
     private fun setupNoteRecyclerView() {
+        noteAdapter = NoteAdapter()
+
 
     }
+
 }
