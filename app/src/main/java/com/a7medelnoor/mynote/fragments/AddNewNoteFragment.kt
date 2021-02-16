@@ -3,6 +3,7 @@ package com.a7medelnoor.mynote.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.a7medelnoor.mynote.MainActivity
 import com.a7medelnoor.mynote.R
 import com.a7medelnoor.mynote.databinding.FragmentAddNewNoteBinding
@@ -53,7 +54,7 @@ private fun saveNewNote(view: View){
     if (newNoteTitle.isNotEmpty()){
         val note = Note(0,newNoteTitle, newNoteBody)
         noteViewModel.addNoteToDatabase(note)
-        activity?.toast("note saved successfully")
+        view.findNavController().navigate(R.id.action_addNewNoteFragment_to_homeFragment)
     }else {
         activity?.toast("Note Title should not be empty")
     }
